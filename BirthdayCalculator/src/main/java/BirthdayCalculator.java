@@ -41,8 +41,8 @@ public class BirthdayCalculator {
         
         LocalDate today = LocalDate.now();
         
-        
-        System.out.println("This year it falls on a " );
+        past.plusYears(2021 - past.getYear());
+        System.out.println("This year it falls on a " + past.getDayOfWeek());
         
     }
     public enum Day {
