@@ -52,8 +52,6 @@ public class VendingMachineController {
         io.print("Thank you for using our vending machine!");
          
     }
-    private int getMenuSelection() {
-        return view.printGetMenuSelection();
-    }
+    
     
 }
