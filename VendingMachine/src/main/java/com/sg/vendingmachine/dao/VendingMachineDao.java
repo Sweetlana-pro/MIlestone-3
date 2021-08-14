@@ -13,7 +13,7 @@ import java.util.List;
  * @Sweetlana Protsenko
  */
 public interface VendingMachineDao {
-    Item updateItem(String name);
-    List<Item> retrieveInventory();
+    Item updateItem(String name, Item item)throws VendingMachineDaoException;
+    List<Item> getAllitems()throws VendingMachineDaoException;
     
 }
