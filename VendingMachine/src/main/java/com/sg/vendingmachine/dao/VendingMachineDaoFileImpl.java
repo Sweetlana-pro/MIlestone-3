@@ -12,11 +12,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -60,14 +63,25 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     private String marshallItem(Item aItem) {
         String itemAsText = aItem.getName() + DELIMITER;
         itemAsText += aItem.getPrice() + DELIMITER;
-        itemAsText += aItem.getQuantity() + DELIMITER;
+        itemAsText += aItem.getQuantity();
         
         return itemAsText;
     }
-    private void writeInventory() throws VendingMachineDaoException {
-        PrintWriter out;
+    public void writeInventory() throws VendingMachineDaoException, FileNotFoundException, IOException {
+        PrintWriter out = new PrintWriter(new FileWriter("Inventory.txt"));
+        /*out.println("Snorlax" + DELIMITER + "0.25" + DELIMITER + "3");
+        out.println("Snorlax" + DELIMITER + "0.25" + DELIMITER + "3");
+        
+        out.flush();
+        out.close();
+        Scanner sc = new Scanner(new BufferedReader(new FileReader("INVENTORY_FILE")));
+        while(sc.hasNextLine()) {
+            String currentLine = sc.nextLine();
+            System.out.println(currentLine);*/
+        
         try {
             out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+            
         } catch (IOException e) {
             throw new VendingMachineDaoException ("Could not save item data.", e);
              
@@ -87,18 +101,42 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         
         loadInventory();
         Item newItem = inventory.put(name, item);
-        writeInventory();
+        try {
+            writeInventory();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(VendingMachineDaoFileImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendingMachineDaoFileImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return newItem;
     }
 
     @Override
-    public List<Item> getAllitems() throws VendingMachineDaoException {
+    public List<Item> getAllitems() {
         
-        loadInventory();
-        return new ArrayList(inventory.values());
+        
+        return new ArrayList<Item>(inventory.values());
     }
-   
-
-    
-    
+    /*public Item getNewItemInfo() throws FileNotFoundException {
+         //getting Item Snorlax
+        String name = "Snorlax";
+        String price = "0.25";
+        String quantity = "3";
+        
+        
+        Item currentItem = new Item (name);
+        currentItem.setPrice(price);
+        currentItem.setQuantity(quantity);
+        
+        
+        out.flush();
+        out.close();
+        Scanner sc = new Scanner(new BufferedReader(new FileReader("INVENTORY_FILE")));
+        while(sc.hasNextLine()) {
+            String currentLine = sc.nextLine();
+            System.out.println(currentLine);
+            
+        return currentItem;
+    }*/
+     
 }

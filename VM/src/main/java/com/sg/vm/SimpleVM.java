@@ -5,6 +5,8 @@
  */
 package com.sg.vm;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author pro
@@ -15,22 +17,21 @@ public class SimpleVM {
     Double money;
     int userChoice;
     int quantitySnorlax = 3;
-    BigDecimal price = "0";
+    double price;
     
     public void printMenu() {
         io.print("POKEMONS");
         io.print("1. Snorlax - 25");
-        io.print("2. Picachu - 40");
-        io.print("3. Eevee   - 50");
-        io.print("4. Mewtwo  - 35");
+        io.print("2. Picachu - 35");
         io.print("5. Exit");
         
     }
     //Getting amount of money
     public double getMoney(){
         
-        money = io.readDouble("Please PUT IN your money");
-        return money;
+        money = io.readDouble("Please PUT IN your money $");
+        double cents = money * 100;
+        return cents;
     }
     
     //Getting selection
@@ -38,18 +39,35 @@ public class SimpleVM {
         userChoice = io.readInt("Awsome! Now, select your Pokemon.");
         return userChoice;
     }
+    do {
+        switch (userChoice != 5) {
+            case 1:
+                int price = 25;
+                change = cents - 25;
+                io.print(" Your change: " + change);
+                break;
+            case 2:
+                price = 35;
+                change = cents - 35;
+                io.print("Your change: " + change);
+                break;
+            case 5:
+                io.print("Good bye");
+                break;
+            default:
+                io.print("UNKNOWN COMMAND");
+        } 
+    } while (cents >= price);
     
-    //monetary calculation
-    if (money == price) {
-       io.print ("Success!"); 
-    } else if (){
+    io.print("Unsufficiant Funds");
     
-    }else
-    if
-  
+    
     
 }
     
-   
+    
+    
+    
     
 }
+    

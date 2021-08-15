@@ -12,14 +12,14 @@ import java.io.IOException;
  *
  * @author pro
  */
-class VendingMachineDaoException extends Exception {
+public class VendingMachineDaoException extends Exception {
 
-    VendingMachineDaoException(String ___Could_not_load_inventory_data_into_mem, FileNotFoundException e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    VendingMachineDaoException(String message) {
+        super(message);
     }
 
-    VendingMachineDaoException(String could_not_save_item_data, IOException e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    VendingMachineDaoException(String message, Throwable cause) {
+        super(message, cause);
     }
     
 }
