@@ -5,11 +5,18 @@
  */
 package com.sg.vendingmachine.service;
 
+import com.sg.vendingmachine.dto.Item;
+import java.util.List;
+
 /**
  *
  * @Sweetlana Protsenko
  */
 public interface VendingMachineServiceLayer {
+    List <Item> getAllItems()throws NoItemInventoryException,
+            InsufficiantFundsException;
+    
+    
     
     
 }

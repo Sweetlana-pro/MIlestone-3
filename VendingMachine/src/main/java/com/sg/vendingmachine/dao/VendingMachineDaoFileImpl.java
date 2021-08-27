@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +34,16 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     public static final String DELIMITER = "::";
     
     private Item unmarshallItem (String itemAsText){
-        String[]itemTokens = itemAsText.split(DELIMITER);
+        String [] itemTokens = itemAsText.split(DELIMITER);
         String name = itemTokens[0];
+        BigDecimal price = new BigDecimal(itemTokens[1]);
+        int quantity = Integer.parseInt(itemTokens[2]);
         Item itemFromFile = new Item(name);
-        itemFromFile.setPrice(itemTokens[1]);
-        itemFromFile.setQuantity(itemTokens[2]);
+        itemFromFile.setPrice(price);
+        itemFromFile.setQuantity(quantity);
         
         return itemFromFile;
+        
     }
     private void loadInventory() throws VendingMachineDaoException {
         Scanner scanner;
@@ -52,11 +56,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
             throw new VendingMachineDaoException(
                     " -_- Could not load inventory data into memory.", e);
         }
-        String currentLine = null;
+        String currentLine; 
         Item currentItem;
         while(scanner.hasNextLine()) {
+            currentLine = scanner.nextLine();
             currentItem = unmarshallItem(currentLine);
+            if(currentItem.getQuantity()>0) {
             inventory.put(currentItem.getName(), currentItem);
+            }
         }
         scanner.close();
     }
@@ -68,16 +75,18 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         return itemAsText;
     }
     public void writeInventory() throws VendingMachineDaoException, FileNotFoundException, IOException {
-        PrintWriter out = new PrintWriter(new FileWriter("Inventory.txt"));
+        PrintWriter out = new PrintWriter(new FileWriter(INVENTORY_FILE));
         /*out.println("Snorlax" + DELIMITER + "0.25" + DELIMITER + "3");
-        out.println("Snorlax" + DELIMITER + "0.25" + DELIMITER + "3");
+        out.println("Picachu" + DELIMITER + "0.45" + DELIMITER + "2");
+        out.println("Eevee" + DELIMITER + "0.50" + DELIMITER + "2");
+        out.println("Mewtwo" + DELIMITER + "0.60" + DELIMITER + "1");
         
         out.flush();
-        out.close();
+        out.close();*/
         Scanner sc = new Scanner(new BufferedReader(new FileReader("INVENTORY_FILE")));
         while(sc.hasNextLine()) {
             String currentLine = sc.nextLine();
-            System.out.println(currentLine);*/
+            System.out.println(currentLine);
         
         try {
             out = new PrintWriter(new FileWriter(INVENTORY_FILE));
@@ -87,13 +96,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
              
         }
         String itemAsText;
-        List<Item> itemList = this.getAllitems();
+        List<Item> itemList = this.getAllItems();
         for (Item currentItem : itemList){
             itemAsText = marshallItem(currentItem);
             out.println(itemAsText);
             out.flush();
         }
         out.close();
+        }
     }
 
     @Override
@@ -112,18 +122,15 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     }
 
     @Override
-    public List<Item> getAllitems() {
-        
-        
+    public List<Item> getAllItems() throws VendingMachineDaoException {
+        loadInventory();
         return new ArrayList<Item>(inventory.values());
     }
     /*public Item getNewItemInfo() throws FileNotFoundException {
          //getting Item Snorlax
-        String name = "Snorlax";
-        String price = "0.25";
-        String quantity = "3";
         
-        
+        BigDecimal price = new BigDecimal();
+        int quantity = Integer.parseInt();
         Item currentItem = new Item (name);
         currentItem.setPrice(price);
         currentItem.setQuantity(quantity);
@@ -137,6 +144,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
             System.out.println(currentLine);
             
         return currentItem;
+        }
     }*/
-     
-}
+}    

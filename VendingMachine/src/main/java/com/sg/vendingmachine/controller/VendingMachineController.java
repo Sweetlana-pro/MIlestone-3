@@ -11,10 +11,12 @@ import com.sg.vendingmachine.dto.Item;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsolImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
- *jhfck
+ *
  * @Sweetlana Protsenko
  */
 public class VendingMachineController {
@@ -27,23 +29,31 @@ public class VendingMachineController {
         this.dao = dao;
         this.view = view;
     }
-    public void printMenu() {
+     private void listItems() throws VendingMachineDaoException  {
+        view.displayAllItemsBanner();
+        List<Item>itemList = dao.getAllItems();
+        view.displayItemList(itemList);
+    }   
+    /*public void printMenu() {
         view.printMenu();
-    }
+    }*/
     public double getMoney() {
         return view.getMoney();
          
     }
     
 
-    public void run() { 
+    public void run() throws VendingMachineDaoException { 
         boolean keepGoing = true;
         int menuSelection = 0;
-        double money = 0.0;
-        double cents = money * 100;
+        BigDecimal money = new BigDecimal ("0");
+        BigDecimal op1 = new BigDecimal ("100");
        
-        while (0) { 
-            printMenu();
+        BigDecimal cents;       
+        cents = money.multiply(op1);
+               
+        while (keepGoing) { 
+            //printMenu();
             /*io.print("POKEMONS");
             io.print("1. Snorlax - $0.5");
             io.print("2. Picachu - $1.0");
@@ -52,7 +62,7 @@ public class VendingMachineController {
             io.print("5. Exit");*/
         
             //menuSelection = io.readInt("Please select your Pokemon.", 1, 5);
-            
+            listItems();
             getMoney();
             
             getSelection();
@@ -116,12 +126,11 @@ public class VendingMachineController {
     private double getSelection() {
         return view.getSelection();
     }
-         
-    
-    
-    /*public double getSelection() {
-        return view.getSelection();
-    }*/
+
+    private void multiply(BigDecimal money, RoundingMode roundingMode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
 
     
             

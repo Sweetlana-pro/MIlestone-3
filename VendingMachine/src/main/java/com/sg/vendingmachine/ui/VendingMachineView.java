@@ -20,7 +20,8 @@ public class VendingMachineView {
     }
     Double money;
     int menuSelection;
-    double cents = money * 100;
+    
+    
     public void printMenu() {
         io.print("POKEMONS");
         io.print("1. Snorlax - $0.25");
@@ -34,7 +35,7 @@ public class VendingMachineView {
     public double getMoney(){
         
         money = io.readDouble("Please PUT IN your money $");
-        cents = money * 100;
+        double cents = money * 100;
         io.print( "Thank you! You put in $" + money + " = " + cents + " cents");
         return cents;
     }
@@ -44,30 +45,30 @@ public class VendingMachineView {
         int menuSelection = io.readInt("Awsome! Now, select your Pokemon.");
         boolean keepGoing = true;
         double price = 0.0;
+        double cents = money * 100;
+        double change = 0;
         
-        double change = cents - price;
-        
-        while (cents > price) { 
+        do  { 
             switch (menuSelection) {
                 case 1:
-                    price = 0.25;
-                    change = cents - 25.0;
-                    io.print(" Your change: " + change);
+                    price = 25.0;
+                    change = cents - price;
+                    io.print(" Your change: " + change + " cents.");
                     break;
                 case 2:
                     price = 35;
                     change = cents - 35.0;
-                    io.print("Your change: " + change);
+                    io.print(" Your change: " + change + " cents.");
                 break;
                 case 3:
                     price = 50.0;
                     change = cents - price;
-                    io.print("Your change: " + change);
+                    io.print(" Your change: " + change + " cents.");
                     break;
                 case 4:
                     price = 60.0;
                     change = cents - price;
-                    io.print("Your change: " + change);
+                    io.print(" Your change: " + change + " cents.");
                     break;
                 case 5:
                     keepGoing = false;
@@ -75,7 +76,11 @@ public class VendingMachineView {
                 default:
                     io.print("UNKNOWN COMMAND");
             }
-        } 
+            
+        } while (change > 0.0);
+            
+        io.print("Unsufficiant funds");
+        
         return change;
         
     }
@@ -92,5 +97,8 @@ public class VendingMachineView {
             io.print(itemInfo);
         }
         io.readString("Please hit Enter to continue");
+    }
+        public void displayAllItemsBanner() {
+        io.print("---All POKEMONS---");
     }
 }    

@@ -13,8 +13,8 @@ import java.math.BigDecimal;
  */
 public class Item {
     private String name;
-    private String price;
-    private String quantity;
+    private BigDecimal price;
+    private int quantity;
 
     public Item(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -23,21 +23,18 @@ public class Item {
     public String getName() {
         return name;
     }
-
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
-
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPrice (BigDecimal price) {
+            this.price = price;
     }
-
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
-
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
     
 }

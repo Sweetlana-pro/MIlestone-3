@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface VendingMachineDao {
     Item updateItem(String name, Item item)throws VendingMachineDaoException;
-    List<Item> getAllitems()throws VendingMachineDaoException;
+    List<Item> getAllItems()throws VendingMachineDaoException;
     
 }

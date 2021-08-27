@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.vendingmachine.dao;
+package com.sg.vendingmachine.service;
 
 /**
  *
- * @Sweetlana Protsenko
+ * @author pro
  */
-public class VendingMachineAuditDaoFileImpl implements VendingMachineAuditDao {
-    //localdatetime + ": " + item + " PURCHASED";
+public class ChangeReturn {
     
 }

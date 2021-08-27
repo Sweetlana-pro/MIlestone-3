@@ -7,6 +7,7 @@ package vendingmachine;
 
 import com.sg.vendingmachine.controller.VendingMachineController;
 import com.sg.vendingmachine.dao.VendingMachineDao;
+import com.sg.vendingmachine.dao.VendingMachineDaoException;
 import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsolImpl;
@@ -17,7 +18,7 @@ import com.sg.vendingmachine.ui.VendingMachineView;
  * @Sweetlana Protsenko
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws VendingMachineDaoException {
         UserIO myIo = new UserIOConsolImpl();
         VendingMachineView myView = new VendingMachineView(myIo);
         VendingMachineDao myDao = new VendingMachineDaoFileImpl();
