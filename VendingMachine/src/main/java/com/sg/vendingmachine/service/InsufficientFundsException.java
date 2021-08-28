@@ -9,6 +9,6 @@ package com.sg.vendingmachine.service;
  *
  * @author pro
  */
-class InsufficiantFundsException extends Exception {
+class InsufficientFundsException extends Exception {
     
 }

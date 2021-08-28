@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dto.Item;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class VendingMachineView {
     int menuSelection;
     
     
-    public void printMenu() {
+    /*public void printMenu() {
         io.print("POKEMONS");
         io.print("1. Snorlax - $0.25");
         io.print("2. Picachu - $0.45");
@@ -30,20 +31,22 @@ public class VendingMachineView {
         io.print("4. Mewtwo  - $0.60");
         io.print("5. Exit");
         
-    }
+    }*/
     //Getting money
-    public double getMoney(){
+    public BigDecimal getMoney(){
         
         money = io.readDouble("Please PUT IN your money $");
         double cents = money * 100;
         io.print( "Thank you! You put in $" + money + " = " + cents + " cents");
-        return cents;
+        return new BigDecimal(money);
     }
     
     //Getting selection
-    public double getSelection() {
+    public int getSelection() {
         int menuSelection = io.readInt("Awsome! Now, select your Pokemon.");
-        boolean keepGoing = true;
+        return menuSelection;
+    }
+       /* boolean keepGoing = true;
         double price = 0.0;
         double cents = money * 100;
         double change = 0;
@@ -83,7 +86,7 @@ public class VendingMachineView {
         
         return change;
         
-    }
+    }*/
     public void displayErrorMessage(String errorMsg) {
         io.print("---ERROR---");
         io.print(errorMsg);
@@ -100,5 +103,23 @@ public class VendingMachineView {
     }
         public void displayAllItemsBanner() {
         io.print("---All POKEMONS---");
+    }
+     //view one item   
+    public void displayDisplayItemBanner() {
+        io.print("---Display Pokemon---");
+    }
+    public String getNameChoice(){
+        return io.readString("Please enter your Pokemon's name");
+    }
+    public void displayItem(Item item) {
+        if(item != null) {
+            io.print(item.getName());
+            //io.print(item.getPrice());
+            //io.print(item.getQuantity(Integer.parseInt()));
+            io. print ("");
+        } else {
+            io.print("No such Pokemon");
+        }
+        io.readString("Please hit enter to continue");
     }
 }    

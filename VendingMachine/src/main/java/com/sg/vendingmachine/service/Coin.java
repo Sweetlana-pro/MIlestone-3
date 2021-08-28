@@ -12,9 +12,9 @@ import java.math.BigDecimal;
  * @Sweetlana Protsenko
  */
 public enum Coin {
-    PENNY(1), NICKlE(5), DIME(10), QUARTER(25);
+    PENNY, NICKlE, DIME, QUARTER;
     
-    private int denomination;
+    /*private int denomination;
     
     private Coin(int denomination) {
         this.denomination = denomination;
@@ -22,6 +22,6 @@ public enum Coin {
     }
     public int getdenomination(){
         return denomination;
-    }
+    }*/
     
 }

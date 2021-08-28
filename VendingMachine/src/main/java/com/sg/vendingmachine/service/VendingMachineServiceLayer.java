@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface VendingMachineServiceLayer {
     List <Item> getAllItems()throws NoItemInventoryException,
-            InsufficiantFundsException;
+            InsufficientFundsException;
     
     
     

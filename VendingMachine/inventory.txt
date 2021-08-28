@@ -1,4 +1,4 @@
-Snorlax::$0.25::3
-Picachu::$0.45::2
-Eevee::$0.50::2
-Mewtwo::$0.60::1
+Snorlax::0.25::3
+Picachu::0.45::2
+Eevee::0.50::2
+Mewtwo::0.60::1

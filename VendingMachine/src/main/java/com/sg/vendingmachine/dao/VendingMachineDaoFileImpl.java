@@ -76,13 +76,13 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     }
     public void writeInventory() throws VendingMachineDaoException, FileNotFoundException, IOException {
         PrintWriter out = new PrintWriter(new FileWriter(INVENTORY_FILE));
-        /*out.println("Snorlax" + DELIMITER + "0.25" + DELIMITER + "3");
+        out.println("Snorlax" + DELIMITER + "0.25" + DELIMITER + "3");
         out.println("Picachu" + DELIMITER + "0.45" + DELIMITER + "2");
         out.println("Eevee" + DELIMITER + "0.50" + DELIMITER + "2");
         out.println("Mewtwo" + DELIMITER + "0.60" + DELIMITER + "1");
         
         out.flush();
-        out.close();*/
+        out.close();
         Scanner sc = new Scanner(new BufferedReader(new FileReader("INVENTORY_FILE")));
         while(sc.hasNextLine()) {
             String currentLine = sc.nextLine();
@@ -146,4 +146,9 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         return currentItem;
         }
     }*/
+
+    @Override
+    public Item getItem(String name) {
+        return inventory.get(name);
+    }
 }    

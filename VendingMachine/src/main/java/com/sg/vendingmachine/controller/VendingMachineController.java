@@ -29,7 +29,7 @@ public class VendingMachineController {
         this.dao = dao;
         this.view = view;
     }
-     private void listItems() throws VendingMachineDaoException  {
+    private void listItems() throws VendingMachineDaoException  {
         view.displayAllItemsBanner();
         List<Item>itemList = dao.getAllItems();
         view.displayItemList(itemList);
@@ -124,11 +124,23 @@ public class VendingMachineController {
         //io.print("Thank you for using our vending machine!");
 
     private double getSelection() {
-        return view.getSelection();
+        // Get selection from user (view)
+        int selection = view.getSelection(); // Use the view to get the selection
+        // Get Money  (view) // Use the view to get the money
+        BigDecimal change = view.getMoney();
+        // Buy the item (service) This is business logic
+        //    service.buyItem()
+        // Handle exception (advanced)
     }
 
     private void multiply(BigDecimal money, RoundingMode roundingMode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    private void viewItem() {
+        view.displayDisplayItemBanner();
+        String name = view.getNameChoice();
+        Item item = dao.getItem(name);
+        view.displayItem(item);
     }
    
 

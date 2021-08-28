@@ -7,13 +7,20 @@ package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
+import com.sg.vendingmachine.dto.Item;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
  * @author pro
  */
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
+
+    @Override
+    public List<Item> getAllItems() throws NoItemInventoryException, InsufficientFundsException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /*private VendingMachineDao dao;
     private VendingMachineAuditDao auditDao;
@@ -31,14 +38,14 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public void addMoney(BigDecimal moneyToAdd) throws VendingPersistenceException {
         funds = funds.add(moneyToAdd);
     }
-
+*/
     @Override
-    public Change buyItem(String itemId) throws VendingNoItemInventoryException, VendingInsuffientFundsException, VendingPersistenceException {
+    public Change buyItem(String itemId) throws NoItemInventoryException, InsufficientFundsException, VendingMachinePersistenceException {
 
         Item item = dao.readItemById(itemId);
         
         if (item.getInventory() == 0) {
-            throw new VendingNoItemInventoryException("Sorry. The item you have selected is sold out.");
+            throw new NoItemInventoryException("Sorry. The item you have selected is sold out.");
         }
 
         if (funds.compareTo(item.getPrice()) < 0) {
@@ -46,7 +53,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
 
         if (funds.compareTo(item.getPrice()) < 0) {
-            throw new VendingInsuffientFundsException("You put in" + funds
+            throw new InsufficientFundsException("You put in" + funds
                     + "which is an insufficient amount of money.");
         }
 
