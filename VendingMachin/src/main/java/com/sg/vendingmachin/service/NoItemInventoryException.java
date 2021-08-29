@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.vendingmachine.service;
+package com.sg.vendingmachin.service;
 
 /**
  *
  * @Sweetlana Protsenko
  */
-public class InsufficientFundsException extends Exception{
+public class NoItemInventoryException extends Exception {
 
-    public InsufficientFundsException(String message) {
+    public NoItemInventoryException(String message) {
         super(message);
     }
 
-    public InsufficientFundsException(String message, Throwable cause) {
+    public NoItemInventoryException(String message, Throwable cause) {
         super(message, cause);
     }
 

@@ -8,12 +8,15 @@ package com.sg.vendingmachine.controller;
 import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachineDaoException;
 import com.sg.vendingmachine.dto.Item;
+import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsolImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import com.sg.vendingmachine.service.ChangeReturn;
+
 
 /**
  *
@@ -24,10 +27,13 @@ public class VendingMachineController {
     private UserIO io = new UserIOConsolImpl();
     private VendingMachineView view;
     private VendingMachineDao dao;
+    private VendingMachineServiceLayer service;
+    public ChangeReturn change;
     
-    public VendingMachineController(VendingMachineDao dao, VendingMachineView view) {
+    public VendingMachineController(VendingMachineDao dao, VendingMachineView view, VendingMachineServiceLayer service, ChangeReturn change) {
         this.dao = dao;
         this.view = view;
+        this.service = service;
     }
     private void listItems() throws VendingMachineDaoException  {
         view.displayAllItemsBanner();
@@ -37,11 +43,21 @@ public class VendingMachineController {
     /*public void printMenu() {
         view.printMenu();
     }*/
-    public double getMoney() {
+    public BigDecimal getMoney() {
         return view.getMoney();
          
     }
-    
+    private String getSelection() {
+        // Get selection from user (view)
+        
+        return view.getSelection();
+    } 
+    public BigDecimal calculateChange () {
+        return view.calculateChange();
+    }
+    public BigDecimal returnCoins() {
+        return change.returnCoins();
+    }
 
     public void run() throws VendingMachineDaoException { 
         boolean keepGoing = true;
@@ -66,6 +82,8 @@ public class VendingMachineController {
             getMoney();
             
             getSelection();
+            //calculateChange ();
+            returnCoins ();
             
             /*menuSelection = io.readInt("Awsome! Now, select your Pokemon.", 1, 5);
             
@@ -119,21 +137,20 @@ public class VendingMachineController {
                     break;
                 default:
                     io.print("UNKNOWN COMMAND");*/
-        } 
         }
+    }
+       
         //io.print("Thank you for using our vending machine!");
 
-    private double getSelection() {
-        // Get selection from user (view)
-        int selection = view.getSelection(); // Use the view to get the selection
+     
         // Get Money  (view) // Use the view to get the money
-        BigDecimal change = view.getMoney();
+        //BigDecimal change = view.getMoney();
         // Buy the item (service) This is business logic
         //    service.buyItem()
         // Handle exception (advanced)
-    }
+    
 
-    private void multiply(BigDecimal money, RoundingMode roundingMode) {
+    /*private void multiply(BigDecimal money, RoundingMode roundingMode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     private void viewItem() {
@@ -141,10 +158,9 @@ public class VendingMachineController {
         String name = view.getNameChoice();
         Item item = dao.getItem(name);
         view.displayItem(item);
-    }
-   
+    }*/
 
     
-            
-    
+   
+
 }

@@ -16,11 +16,14 @@ import java.util.List;
 public class VendingMachineView {
     
     private UserIO io;
+    private Object dao;
+    private Object dto;
+    private Object item;
     public VendingMachineView(UserIO io) {
         this.io = io;
     }
-    Double money;
-    int menuSelection;
+    BigDecimal money;
+    String menuSelection;
     
     
     /*public void printMenu() {
@@ -35,16 +38,90 @@ public class VendingMachineView {
     //Getting money
     public BigDecimal getMoney(){
         
-        money = io.readDouble("Please PUT IN your money $");
-        double cents = money * 100;
+        BigDecimal money = io.readBigDecimal("Please PUT IN your money $");
+        
+        BigDecimal op1 = new BigDecimal ("100");
+        BigDecimal price = new BigDecimal ("0");   
+        BigDecimal cents = money.multiply(op1); 
+        BigDecimal change = new BigDecimal("0");
+        
         io.print( "Thank you! You put in $" + money + " = " + cents + " cents");
-        return new BigDecimal(money);
+        return cents;
     }
     
     //Getting selection
-    public int getSelection() {
-        int menuSelection = io.readInt("Awsome! Now, select your Pokemon.");
+    public String getSelection() {
+        
+        String menuSelection = io.readString("Awsome! Now, select your Pokemon.");
+            switch (menuSelection) { 
+                case "Snorlax":
+                    break;
+                case "Picachu":
+                    break;
+                case "Eevee":
+                    break;
+                case "Mewtwo":
+                    break;
+                default:
+                    io.print("No such Pokemon. Please try again");
+            }
+        //checks if inventory is less than 0
+        //if(item.getQuantity() <= 0) {
+             //if (dto.item.getQuantity () == 0){
+            //io.print("Sorry. The item you have selected is sold out.");
+        
         return menuSelection;
+    }
+    
+    
+    
+    
+    
+    /*public String itemSelection () {
+        
+    String menuSelection = io.readString("Awsome! Now, select your Pokemon."); 
+    }
+    
+    public void approvePurchase () {
+        if (cents.compareTo(item.getPrice()) < 0) {
+            throw new InsufficientFundsException("You put in $" + money
+                    + "which is an insufficient amount of money.");
+        }
+    }*/
+    
+    public BigDecimal calculateChange () {
+    Item item;
+      
+    BigDecimal cents = getMoney();
+    BigDecimal change = new BigDecimal("0");
+    
+        switch (menuSelection) { 
+            case "Snorlax":
+                
+                   
+
+                io.print(" Your change: " + change + " cents.");
+                break;
+                /*case Picachu:
+                    price = "35";
+
+                    io.print(" Your change: " + change + " cents.");
+                    break;
+                case Eevee:
+                    price = 50.0;
+
+                    io.print(" Your change: " + change + " cents.");
+                    break;
+                case Mewtwo:
+                    price = 60.0;
+
+                    io.print(" Your change: " + change + " cents.");
+                    break;*/
+            default:
+                io.print("UNKNOWN COMMAND");
+            }
+        return change;
+        
     }
        /* boolean keepGoing = true;
         double price = 0.0;

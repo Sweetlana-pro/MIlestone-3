@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.vendingmachine.dao;
+package com.sg.vendingmachin.dao;
 
 /**
  *
  * @Sweetlana Protsenko
  */
-public interface VendingMachineAuditDao {
-
-    public void writeAuditEntry(String entry) throws VendingMachinePersistenceException;
-
+public interface VendingMachinAuditDao {
+    public void writeAuditEntry (String entry) throws VendingMachinPersistenceException;
 }

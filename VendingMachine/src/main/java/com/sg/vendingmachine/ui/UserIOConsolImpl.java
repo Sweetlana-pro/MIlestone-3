@@ -211,11 +211,51 @@ public class UserIOConsolImpl implements UserIO {
         } while (result < min || result > max);
         return result;
     }
-
+    
     @Override
     public BigDecimal readBigDecimal(String prompt) {
+        boolean isValid = false;
+        BigDecimal result = BigDecimal.ZERO;
+        do {
+            String value = null;
+            try {
+                value = readString(prompt);
+                result = new BigDecimal(value);
+                isValid = true;
+            } catch (NumberFormatException ex) {
+                System.out.printf("The value '%s' is not a number. \n", ex);
+            }
+        } while (!isValid);
+        return result;
+    }
+
+    /*@Override
+    public BigDecimal readOptionalBigDecimal(String prompt) {
+        boolean isValid = false;
+        BigDecimal result = BigDecimal.ZERO;
+        do {
+            String value = null;
+            try {
+                value = readString(prompt);
+                if (!value.equals("")) {
+                    result = new BigDecimal(value);
+                    isValid = true;
+                } else {
+                    result = BigDecimal.ZERO;
+                    isValid = true;
+                }
+            } catch (NumberFormatException ex) {
+                System.out.printf("The value '%s' is not a number. \n");
+            }
+        } while (!isValid);
+        return result;
+    }*/
+
+    @Override
+    public BigDecimal printBigDecimal(BigDecimal num) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
 }
 

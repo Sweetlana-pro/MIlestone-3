@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author pro
+ * @Sweetlana Protsenko
  */
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
@@ -38,34 +38,34 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public void addMoney(BigDecimal moneyToAdd) throws VendingPersistenceException {
         funds = funds.add(moneyToAdd);
     }
-*/
+
     @Override
-    public Change buyItem(String itemId) throws NoItemInventoryException, InsufficientFundsException, VendingMachinePersistenceException {
+    public ChangeReturn buyItem(String name) throws NoItemInventoryException, InsufficientFundsException {
 
-        Item item = dao.readItemById(itemId);
+        Item item = dao.readItemByName(name);
         
-        if (item.getInventory() == 0) {
-            throw new NoItemInventoryException("Sorry. The item you have selected is sold out.");
+        if (item.getQuantity() == 0) {
+            throw new NoItemInventoryException ("Sorry. The item you have selected is sold out.");
         }
 
-        if (funds.compareTo(item.getPrice()) < 0) {
+        if (view.cents.compareTo(item.getPrice()) < 0) {
 
         }
 
-        if (funds.compareTo(item.getPrice()) < 0) {
-            throw new InsufficientFundsException("You put in" + funds
+        if (cents.compareTo(item.getPrice()) < 0) {
+            throw new InsufficientFundsException("You put in $" + money
                     + "which is an insufficient amount of money.");
         }
 
-        if (funds.compareTo(item.getPrice()) >= 0) {
+        if (cents.compareTo(item.getPrice()) >= 0) {
         (item.setInventory() - 1);
         dao.removeItem(itemId);
         auditDao.writeAuditEntry("Item " + item.getName() + "PURCHASED.");
         return endUserChange;
-    }
+    }*/
 
 
-    /* private List<Item> getAvailableItems() throws VendingPersistenceException {
+    /*private List<Item> getAvailableItems() throws VendingPersistenceException {
         loadMachine();
         List<Item> availableItems = items.entrySet()
                 .stream()

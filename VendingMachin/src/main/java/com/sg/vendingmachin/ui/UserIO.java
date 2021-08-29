@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.vendingmachine.ui;
+package com.sg.vendingmachin.ui;
 
 import java.math.BigDecimal;
 
@@ -12,16 +12,29 @@ import java.math.BigDecimal;
  * @Sweetlana Protsenko
  */
 public interface UserIO {
-    void print (String message);
-    String readString(String promt);
-    int readInt(String prompt);
-    int readInt(String prompt, int min, int max);
+    
+    void print(String message);
+
     double readDouble(String prompt);
+
     double readDouble(String prompt, double min, double max);
+
     float readFloat(String prompt);
+
     float readFloat(String prompt, float min, float max);
+
+    int readInt(String prompt);
+
+    int readInt(String prompt, int min, int max);
+
     long readLong(String prompt);
+
     long readLong(String prompt, long min, long max);
-    BigDecimal readBigDecimal(String prompt);
-    BigDecimal printBigDecimal(BigDecimal num);
+
+    String readString(String prompt);
+
+    public void printInt(int num);
+
+    public void printBigDecimal(BigDecimal num);
+
 }
