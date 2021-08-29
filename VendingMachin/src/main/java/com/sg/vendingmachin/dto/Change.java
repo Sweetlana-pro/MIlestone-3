@@ -14,75 +14,65 @@ import java.math.BigDecimal;
 public class Change {
     Item item;
 
-    private int dollars, quarters, dimes, nickels, pennies;
+    private int numQuarters, numDimes, numNickels, numPennies;
 
 
-    public void makeChange(Item item, BigDecimal deposit) {
+    public BigDecimal makeChange(Item item, BigDecimal deposit) {
 
-        BigDecimal one = new BigDecimal("1");
-        BigDecimal five = new BigDecimal("5");
-        BigDecimal ten = new BigDecimal("10");
-        BigDecimal twentyFive = new BigDecimal("25");
-        BigDecimal oneHundread = new BigDecimal("100");
+        BigDecimal penny = new BigDecimal("1");
+        BigDecimal nickle = new BigDecimal("5");
+        BigDecimal dime = new BigDecimal("10");
+        BigDecimal quarter = new BigDecimal("25");
+        BigDecimal cents = new BigDecimal("100");
 
         BigDecimal price = item.getItemPrice();
 
 
-        BigDecimal myChange = deposit.subtract(price);
+        BigDecimal totalChange = deposit.subtract(price);
 
-        myChange = myChange.multiply(oneHundread);
+        BigDecimal myChange = totalChange.multiply(cents);
 
-        dollars = 0;
-        quarters = 0;
-        dimes = 0;
-        nickels = 0;
-        pennies = 0;
+        numQuarters = 0;
+        numDimes = 0;
+        numNickels = 0;
+        numPennies = 0;
 
         while (myChange.floatValue() > 0) {
-            //System.out.println(myChange);
-            { 
-                if (myChange.floatValue() >= 100) {
-                  myChange =  myChange.subtract(oneHundread);
-                    dollars++;
-                } else if (myChange.floatValue() >= 25) {
-                    myChange =  myChange.subtract(twentyFive);
-                    quarters++;
-                } else if (myChange.floatValue() >= 10) {
-                    myChange =  myChange.subtract(ten);
-                    dimes++;
-                } else if (myChange.floatValue() >= 5) {
-                    myChange =  myChange.subtract(five);
-                    nickels++;
-                } else if (myChange.floatValue() >= 1) {
-                    myChange =  myChange.subtract(one);
-                    pennies++;
+            
+            if (myChange.floatValue() >= 25) {
+                myChange =  myChange.subtract(quarter);
+                numQuarters++;
+            } else if (myChange.floatValue() >= 10) {
+                myChange =  myChange.subtract(dime);
+                numDimes++;
+            } else if (myChange.floatValue() >= 5) {
+                myChange =  myChange.subtract(nickle);
+                numNickels++;
+            } else if (myChange.floatValue() >= 1) {
+                myChange =  myChange.subtract(penny);
+                numPennies++;
                 }
-
-            }
+            
         }
-
+        return totalChange;
 
     }
-
-    public int getDollars() {
-        return dollars;
-    }
+    
 
     public int getQuarters() {
-        return quarters;
+        return numQuarters;
     }
 
     public int getDimes() {
-        return dimes;
+        return numDimes;
     }
 
     public int getNickels() {
-        return nickels;
+        return numNickels;
     }
 
     public int getPennies() {
-        return pennies;
+        return numPennies;
     }
-
 
 }

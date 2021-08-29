@@ -24,8 +24,8 @@ public class VendingMachinView {
 
     public int printMenuAndGetSelection() {
         io.print("Main Menu");
-        io.print("1. Purchase Item");
-        io.print("2. List Item");
+        io.print("1. Buy Item");
+        io.print("2. View Item");
         io.print("3. Exit");
 
         return io.readInt("Please select from the above choices.", 1, 3);

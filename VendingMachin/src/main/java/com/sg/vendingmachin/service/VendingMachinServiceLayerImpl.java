@@ -50,33 +50,32 @@ public class VendingMachinServiceLayerImpl implements VendingMachinServiceLayer 
            InsufficientFundsException, 
            NoItemInventoryException {
 
-        //gets requested item
+        //Getting item
         Item item = dao.getItem(itemNumber);
 
-        //check if item is available
+        //checking if the item is available
         if(item.getItemQuantity() <= 0) {
             throw new NoItemInventoryException(
-                "ERROR: Item "
-                + item.getItemName()
-                + "is SOLD OUT");
+                "ERROR: " + item.getItemName()+ " is SOLD OUT");
+               
         }
 
-        //check if deposit is greater than or equal to price
+        //checking if deposit is greater than or equal to price
          if(deposit.compareTo(item.getItemPrice()) < 0) {
              throw new InsufficientFundsException("Insufficient Funds");
          }
 
-        //pass in price and deposit into change class and calculate change
+        //calculating change
         change.makeChange(item, deposit);
 
-        //subtract 1 from item inventory
+        //subtracting items from the inventory
         dao.buyItem(itemNumber);
-
-        String stringChange = "Your recieving " + change.getDollars()+ " Dollars "
-                            +    "\nYour recieving " + change.getQuarters()+ " Quarters "
-                     +   "\nYour recieving " + change.getDimes()+ " Dimes "
-                      +         "\nYour recieving " + change.getNickels()+ " Nickels "
-                        +                "\nYour recieving " + change.getPennies()+ " Pennies";
+         
+        String stringChange = "$ " + change.makeChange(item, deposit) + 
+                "\nYou get " + change.getQuarters()+ " Quarters "
+                     +   "\n        " + change.getDimes()+ " Dimes "
+                      +         "\n        " + change.getNickels()+ " Nickels "
+                        +                "\n        " + change.getPennies()+ " Pennies";
 
         auditDao.writeAuditEntry("Item " + item.getItemName() + " PURCHASED.");
 
