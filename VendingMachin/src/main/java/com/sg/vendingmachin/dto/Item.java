@@ -58,15 +58,20 @@ public class Item {
      return itemQuantity--;
     }
 
-    /*@Override
+    @Override
+    public String toString() {
+        return "Item{" + "itemNumber=" + itemNumber + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemQuantity=" + itemQuantity + '}';
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.itemNumber);
-        hash = 53 * hash + Objects.hashCode(this.itemName);
-        hash = 53 * hash + Objects.hashCode(this.itemPrice);
-        hash = 53 * hash + this.itemQuantity;
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.itemNumber);
+        hash = 71 * hash + Objects.hashCode(this.itemName);
+        hash = 71 * hash + Objects.hashCode(this.itemPrice);
+        hash = 71 * hash + this.itemQuantity;
         return hash;
-    }*/
+    }
 
     @Override
     public boolean equals(Object obj) {

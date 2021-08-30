@@ -25,16 +25,17 @@ import java.util.Scanner;
  */
 public class VendingMachinDaoFileImpl implements VendingMachinDao {
 
-    public static String INVENTORY_FILE = "inventory.txt";
+    public static String INVENTORY_FILE;
     public static final String DELIMITER = "::";
 
     private Map<String, Item> items = new HashMap<>();
 
-    public VendingMachinDaoFileImpl() {   
+    public VendingMachinDaoFileImpl() {
+        INVENTORY_FILE = "inventory.txt";
     }
 
-    public VendingMachinDaoFileImpl(String whichFile) {
-        INVENTORY_FILE = whichFile;
+    public VendingMachinDaoFileImpl(String inventoryTextFile) {
+        INVENTORY_FILE = inventoryTextFile;
     }
 
 

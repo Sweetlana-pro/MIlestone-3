@@ -23,7 +23,7 @@ public class VendingMachinView {
     }
 
     public int printMenuAndGetSelection() {
-        io.print("Main Menu");
+        io.print("===Main Menu===");
         io.print("1. Buy Item");
         io.print("2. View Item");
         io.print("3. Exit");
@@ -33,9 +33,9 @@ public class VendingMachinView {
 
     public void displayItemList(List<Item> itemList) {
         for (Item currentItem : itemList) {
-            io.print(currentItem.getItemNumber() + ": "
-                    + currentItem.getItemName() + " "
-                    + currentItem.getItemPrice() + " "
+            io.print(currentItem.getItemNumber() + ". "
+                    + currentItem.getItemName() + " $"
+                    + currentItem.getItemPrice() + " Q-ty: "
                     + currentItem.getItemQuantity());
         }
         io.readString("Please hit enter to continue.");
@@ -43,9 +43,11 @@ public class VendingMachinView {
 
     public void displayItem(Item item) {
 	    if (item != null) {
-	        io.print(item.getItemNumber());
-	        io.print(item.getItemName() + " " + item.getItemName());
+	        
+	        io.print(item.getItemName() + " " );
+                io.print("Price, $:");
 	        io.printBigDecimal(item.getItemPrice());
+                io.print("Available items:");
                 io.printInt(item.getItemQuantity());
 	        io.print("");
 	    } else {
