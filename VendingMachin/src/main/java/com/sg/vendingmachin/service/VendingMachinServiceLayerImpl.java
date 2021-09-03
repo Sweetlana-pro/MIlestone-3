@@ -32,6 +32,12 @@ public class VendingMachinServiceLayerImpl implements VendingMachinServiceLayer 
        this.change = change;
     }
 
+    VendingMachinServiceLayerImpl(VendingMachinDao dao, VendingMachinAuditDao auditDao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
+
     @Override
     public List<Item> getAllItems() throws VendingMachinPersistenceException {
             
