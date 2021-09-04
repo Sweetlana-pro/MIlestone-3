@@ -101,7 +101,7 @@ public class VendingMachinView {
 	}
 
     public void displayChange(String change) {
-        io.print("Your change is " + change);
+        io.print("Your change is $ " + change);
     }
 
 }

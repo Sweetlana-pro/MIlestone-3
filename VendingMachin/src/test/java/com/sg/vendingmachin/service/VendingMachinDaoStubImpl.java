@@ -50,6 +50,7 @@ public class VendingMachinDaoStubImpl implements VendingMachinDao {
     @Override
     public void buyItem(String itemNumber) throws VendingMachinPersistenceException {
         //do nothing
+        
     }
     
 }

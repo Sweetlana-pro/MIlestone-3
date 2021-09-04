@@ -59,17 +59,17 @@ public class VendingMachinDaoFileImplTest {
     @Test
     public void testGetItem()throws Exception {
                 
-        //Create our method test inputs
+        //Arrange our method test inputs
         String itemNumber = "1";
         Item item = new Item(itemNumber);
         item.setItemName("Snorlax");
         item.setItemPrice(BigDecimal.valueOf(0.25));
         item.setItemQuantity(2);
                         
-        //Get the item from the DAO
+        //Act the item from the DAO
         Item retrievedItem = testDao.getItem(itemNumber);
         
-        //Check the data is equal
+        //Assert the data is equal
         assertEquals(item.getItemNumber(), retrievedItem.getItemNumber(),
                 "Checking item number");
         assertEquals(item.getItemName(), retrievedItem.getItemName(),
@@ -83,6 +83,7 @@ public class VendingMachinDaoFileImplTest {
     
     @Test 
     public void testGetAllItems() throws Exception {
+        //Assert method's inputs
         //Create our first item
         Item firstItem = new Item ("1");
         firstItem.setItemName("Snorlax");
@@ -112,15 +113,11 @@ public class VendingMachinDaoFileImplTest {
         fourthItem.setItemPrice(fourthItemPrice);   
         fourthItem.setItemQuantity(Integer.parseInt("2"));
     
-        //Add items to the DAO
-       /* testDao.addItem(firstItem.getItemNumber(), firstItem);
-        testDao.addItem(secondItem.getItemNumber(), secondItem);
-        testDao.addItem(thirdItem.getItemNumber(), thirdItem);
-        testDao.addItem(fourthItem.getItemNumber(), fourthItem);*/
-        
+        //Act
         //retrieve the list of items within the DAO
         List<Item> allItems = testDao.getAllItems();
         
+        //Assert
         //First check the general contents of the list
         assertNotNull(allItems, "The list of items must not be null");
         assertEquals(4, allItems.size(), "List of pokemons should have 4 items.");
@@ -135,6 +132,48 @@ public class VendingMachinDaoFileImplTest {
         assertTrue(testDao.getAllItems().contains(fourthItem),
                 "This list of Pokemons should include Mewtwo ");
     
+    }
+    
+    @Test
+    public void testBuyItem () throws Exception {
+        //Arrange our method test inputs
+        //Create our first Item
+        String itemNumber = "1";
+        Item item = new Item(itemNumber);
+        item.setItemName("Snorlax");
+        item.setItemPrice(BigDecimal.valueOf(0.25));
+        item.setItemQuantity(2);
+        //Create our second Item
+        Item secondItem = new Item("2");
+        secondItem.setItemName("Picachu");
+        secondItem.setItemPrice(BigDecimal.valueOf(0.45));
+        secondItem.setItemQuantity(Integer.parseInt("2"));
+        //Create our third item
+        Item thirdItem = new Item ("3");
+        thirdItem.setItemName("Eevee");
+        BigDecimal itemPrice = new BigDecimal ("0.50");
+        String i = String.valueOf(itemPrice);
+        thirdItem.setItemPrice(itemPrice);
+        thirdItem.setItemQuantity(Integer.parseInt("1"));    
+        //Create our fourth item
+        Item fourthItem = new Item ("4");
+        fourthItem.setItemName("Mewtwo");
+        BigDecimal fourthItemPrice = new BigDecimal ("0.60");
+        String b = String.valueOf(fourthItemPrice);
+        fourthItem.setItemPrice(fourthItemPrice);   
+        fourthItem.setItemQuantity(Integer.parseInt("2"));
+        
+        //act
+        testDao.buyItem("1");
+        testDao.buyItem("2");
+        testDao.buyItem("3");
+        testDao.buyItem("4");
+        
+       //assert
+        assertEquals(1, testDao.getItem("1").getItemQuantity());
+        assertEquals(1, testDao.getItem("2").getItemQuantity());
+        assertEquals(0, testDao.getItem("3").getItemQuantity());
+        assertEquals(1, testDao.getItem("4").getItemQuantity());
     }
     
 }

@@ -32,6 +32,10 @@ public class VendingMachinServiceLayerImpl implements VendingMachinServiceLayer 
        this.change = change;
     }
 
+    /*VendingMachinServiceLayerImpl(VendingMachinDao dao, VendingMachinAuditDao auditDao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
+
     VendingMachinServiceLayerImpl(VendingMachinDao dao, VendingMachinAuditDao auditDao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -77,11 +81,11 @@ public class VendingMachinServiceLayerImpl implements VendingMachinServiceLayer 
         //subtracting items from the inventory
         dao.buyItem(itemNumber);
          
-        String stringChange = "$ " + change.makeChange(item, deposit) + 
-                "\nYou get " + change.getQuarters()+ " Quarters "
-                     +   "\n        " + change.getDimes()+ " Dimes "
-                      +         "\n        " + change.getNickels()+ " Nickels "
-                        +                "\n        " + change.getPennies()+ " Pennies";
+        String stringChange = change.makeChange(item, deposit) + 
+               "\nYou get " + change.getQuarters()+ " Quarters "
+                     +   "\n" + change.getDimes()+ " Dimes "
+                      +         "\n" + change.getNickels()+ " Nickels "
+                        +                "\n" + change.getPennies()+ " Pennies";
 
         auditDao.writeAuditEntry("Item " + item.getItemName() + " PURCHASED.");
 
