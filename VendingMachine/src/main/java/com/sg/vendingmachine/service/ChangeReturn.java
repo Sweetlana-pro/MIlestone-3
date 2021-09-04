@@ -17,7 +17,7 @@ import java.math.RoundingMode;
  * @Sweetlana Protsenko
  */
 public class ChangeReturn {
-    Item item;
+    /*Item item;
     UserIO io;
     BigDecimal money = new BigDecimal ("0");
     BigDecimal op1 = new BigDecimal ("100");

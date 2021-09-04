@@ -33,10 +33,14 @@ public class VendingMachinView {
 
     public void displayItemList(List<Item> itemList) {
         for (Item currentItem : itemList) {
-            io.print(currentItem.getItemNumber() + ". "
-                    + currentItem.getItemName() + " $"
-                    + currentItem.getItemPrice() + " Q-ty: "
-                    + currentItem.getItemQuantity());
+            if(currentItem.getItemQuantity()>0) {
+                io.print(currentItem.getItemNumber() + ". "
+                        + currentItem.getItemName() + " $"
+                        + currentItem.getItemPrice() + " Q-ty: "
+                        + currentItem.getItemQuantity());
+            }else {
+                io.print(" ");
+            }
         }
         io.readString("Please hit enter to continue.");
     }

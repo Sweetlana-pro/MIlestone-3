@@ -55,9 +55,9 @@ public class VendingMachineController {
     public BigDecimal calculateChange () {
         return view.calculateChange();
     }
-    public BigDecimal returnCoins() {
+    /*public BigDecimal returnCoins() {
         return change.returnCoins();
-    }
+    }*/
 
     public void run() throws VendingMachineDaoException { 
         boolean keepGoing = true;
